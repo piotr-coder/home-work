@@ -1,18 +1,22 @@
 package springhomework.domain;
 
+import org.springframework.stereotype.Service;
+import springhomework.repositories.ExerciseRepository;
+
 import java.util.HashSet;
 import java.util.Set;
 
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("I'm on my way...");
+@Service
+public class ExerciseServiceImpl implements ExerciseService{
+    private final ExerciseRepository exerciseRepository;
 
-        Set<Answer> odpowiedzi = makeAnExercise().getAnswers();
-        for (Answer answer : odpowiedzi) {
-            System.out.println(answer.getDescription());
-        }
+    public ExerciseServiceImpl(ExerciseRepository exerciseRepository) {
+        this.exerciseRepository = exerciseRepository;
     }
-    private static Exercise makeAnExercise(){
+
+
+    @Override
+    public Exercise makeAnExercise(){
 //        Homework homework = new Homework();
         Exercise exercise = new Exercise();
         exercise.setId(1l);
