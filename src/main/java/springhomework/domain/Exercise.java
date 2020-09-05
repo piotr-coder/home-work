@@ -21,5 +21,4 @@ public class Exercise {
 
     @ManyToOne
     private Homework homework;
-
-}
+    }

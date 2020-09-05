@@ -1,14 +1,18 @@
 package springhomework.domain;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import springhomework.repositories.ExerciseRepository;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
+@Slf4j
 @Service
 public class ExerciseServiceImpl implements ExerciseService{
     private final ExerciseRepository exerciseRepository;
+    private String userName;
 
     public ExerciseServiceImpl(ExerciseRepository exerciseRepository) {
         this.exerciseRepository = exerciseRepository;
@@ -16,33 +20,34 @@ public class ExerciseServiceImpl implements ExerciseService{
 
 
     @Override
-    public Exercise makeAnExercise(){
-//        Homework homework = new Homework();
-        Exercise exercise = new Exercise();
-        exercise.setId(1l);
-        exercise.setName("Zadanie 1");
-        exercise.setTask("Przetłumacz poniższe zdanie");
-        exercise.setContent("Jem jabłko");
-        Set<Answer> answers = new HashSet<>();
-        Answer answer = new Answer();
-        answer.setDescription("I'm eating an apple");
-        answer.setExercise(exercise);
-        answers.add(answer);
-        Answer answer2 = new Answer();
-        answer2.setDescription("I'm eating an apple.");
-        answer2.setExercise(exercise);
-        answers.add(answer2);
-        Answer answer3 = new Answer();
-        answer3.setDescription("I am eating an apple");
-        answer3.setExercise(exercise);
-        answers.add(answer3);
-        answer = new Answer();
-        answer.setDescription("I am eating an apple.");
-        answer.setExercise(exercise);
-        answers.add(answer);
-        exercise.setAnswers(answers);
+    public String getUserName() {
+        return userName;
+    }
+    @Override
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
+    @Override
+    public Exercise findById(Long l) {
+            Optional<Exercise> exerciseOptional = exerciseRepository.findById(l);
+            if(!exerciseOptional.isPresent()){
+                throw new RuntimeException("Recipe Not Found!!");
+            }
+            return exerciseOptional.get();
+    }
 
+    @Override
+    public Set<Exercise> getExercises() {
+        log.debug("I'm in the service");
+        Set<Exercise> exerciseSet = new HashSet<>();
+        exerciseRepository.findAll().iterator().forEachRemaining(exerciseSet::add);
+        return exerciseSet;
+    }
+
+    @Override
+    public Exercise saveExercise(Exercise exercise) {
+        exerciseRepository.save(exercise);
         return exercise;
     }
 }

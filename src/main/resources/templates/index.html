@@ -6,13 +6,20 @@
 </head>
 <body>
 <div align="center">
-    <h1 id="welcome">Witam Martynko w zadaniach domowych</h1>
-    <h3>
-        <a href="/welcome.html" th:href="@{welcome}">
-            Kliknij aby wystartować
-        </a>
-    </h3>
-    <div id="footerId">Created by Piotrek</div>
+    <form th:object="${inputText}" th:action="@{indexx}" method="post">
+        <h1 id="welcome">Witam w zadaniach domowych</h1>
+        <div class="col-md-3 form-group">
+            <label>Podaj swoje imię:</label>
+            <input type="text" name="inputText"class="form-control"/>
+        </div>
+
+        <h3>
+        </h3>
+        <div>
+            <button type="submit" class="btn btn-primary">Zatwierdź</button>
+        </div>
+        <div id="footerId">Created by Piotrek</div>
+    </form>
 </div>
 </body>
 </html>
