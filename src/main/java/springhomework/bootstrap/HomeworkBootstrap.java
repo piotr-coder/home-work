@@ -7,12 +7,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import springhomework.domain.Answer;
 import springhomework.domain.Exercise;
+import springhomework.domain.Homework;
 import springhomework.repositories.ExerciseRepository;
 import springhomework.repositories.HomeworkRepository;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Slf4j
@@ -31,18 +30,19 @@ public class HomeworkBootstrap implements ApplicationListener<ContextRefreshedEv
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
         log.debug("onApplicationEvent was invoked");
-        exerciseRepository.saveAll(makeAnExercises());
+        Homework homework = new Homework();
+        homework.setTask("Przetłumacz poniższe zdanie");
+        Set<Exercise> exerciseList = makeExercises();
+        homework.setExercises(exerciseList);
+        exerciseRepository.saveAll(makeExercises());
+//        homeworkRepository.save(homework);
 
 }
-    private List<Exercise> makeAnExercises(){
-//        Homework homework = new Homework();
-
-        List<Exercise> exercises = new ArrayList<>(2);
+    private Set<Exercise> makeExercises(){
+        Set<Exercise> exercises = new HashSet<>(2);
 
         Exercise exercise = new Exercise();
         exercise.setId(1l);
-        exercise.setName("Zadanie 1");
-        exercise.setTask("Przetłumacz poniższe zdanie");
         exercise.setContent("Jem jabłko");
         Set<Answer> answers = new HashSet<>();
         Answer answer = new Answer();
@@ -68,8 +68,6 @@ public class HomeworkBootstrap implements ApplicationListener<ContextRefreshedEv
 
         exercise = new Exercise();
         exercise.setId(2l);
-        exercise.setName("Zadanie 2");
-        exercise.setTask("Przetłumacz poniższe zdanie");
         exercise.setContent("Ja mam telefon komórkowy");
         answers = new HashSet<>();
         answer = new Answer();

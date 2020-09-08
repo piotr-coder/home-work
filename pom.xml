@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <userName>spring-home-work</userName>
+    <name>spring-home-work</name>
     <description>Spring Application Project to help doing home work for my child</description>
 
     <parent>
@@ -80,7 +80,7 @@
     <pluginRepositories>
         <pluginRepository>
             <id>spring-snapshots</id>
-            <userName>Spring Snapshots</userName>
+            <name>Spring Snapshots</name>
             <url>https://repo.spring.io/snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
@@ -88,7 +88,7 @@
         </pluginRepository>
         <pluginRepository>
             <id>spring-milestones</id>
-            <userName>Spring Milestones</userName>
+            <name>Spring Milestones</name>
             <url>https://repo.spring.io/milestone</url>
             <snapshots>
                 <enabled>false</enabled>

@@ -1,10 +1,10 @@
-package springhomework.domain;
+package springhomework.services;
+
+import springhomework.domain.Exercise;
 
 import java.util.Set;
 
 public interface ExerciseService {
-    void setUserName(String userName);
-    String getUserName();
     Set<Exercise> getExercises();
     Exercise findById(Long l);
     Exercise saveExercise(Exercise exercise);

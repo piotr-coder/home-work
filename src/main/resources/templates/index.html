@@ -6,11 +6,12 @@
 </head>
 <body>
 <div align="center">
-    <form th:object="${inputText}" th:action="@{indexx}" method="post">
+    <form th:action="@{index}" method="post">
         <h1 id="welcome">Witam w zadaniach domowych</h1>
         <div class="col-md-3 form-group">
             <label>Podaj swoje imię:</label>
-            <input type="text" name="inputText"class="form-control"/>
+            <input type="text" name="userName" class="form-control"/>
+            <!--<input th:value="${inputText}" />-->
         </div>
 
         <h3>

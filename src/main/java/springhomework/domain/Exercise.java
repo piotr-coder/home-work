@@ -13,8 +13,6 @@ public class Exercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String task;
     private String content;
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Answer> answers = new HashSet<>();

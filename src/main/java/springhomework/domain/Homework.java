@@ -11,6 +11,9 @@ public class Homework {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
+    private String task;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "homework")
     private Set<Exercise> exercises;
 
