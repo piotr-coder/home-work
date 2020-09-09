@@ -1,6 +1,7 @@
 package springhomework.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@EqualsAndHashCode(exclude = {"homework"})
 public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

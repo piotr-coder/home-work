@@ -16,7 +16,6 @@ public class Answer {
     private Long id;
     private String description;
 
-//    @ManyToMany(mappedBy = "answers")
     @ManyToOne
     private Exercise exercise;
 }

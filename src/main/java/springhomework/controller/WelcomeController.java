@@ -8,13 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import springhomework.domain.Answer;
-import springhomework.domain.Exercise;
 import springhomework.services.ExerciseService;
 import springhomework.services.HomeworkService;
-
-import java.util.Iterator;
-import java.util.Set;
 
 @Slf4j
 @Data
@@ -33,6 +28,7 @@ public class WelcomeController {
     @PostMapping({"index","/index"})
     public String handleIndexPage(@RequestParam String userName){
         homeworkService.setUserName(userName);
+        homeworkService.findById(1l).setName(userName);
         log.info("I'm in handleIndexPage(): User entered name: " + userName);
         return "redirect:/welcome";
     }
@@ -40,14 +36,15 @@ public class WelcomeController {
     @RequestMapping({"welcome", "/welcome"})
     public String showWelcomePage(Model model){
         System.out.println("User name was set by user to: " + homeworkService.getUserName());
-        model.addAttribute("exercise", exerciseService.findById(2L));
-        Exercise exercise = exerciseService.findById(2L);
-        Set<Answer> answers = exercise.getAnswers();
-        for (Iterator<Answer> iterator = answers.iterator(); iterator.hasNext(); ) {
-            Answer next =  iterator.next();
-            System.out.println(next.getDescription());
-        }
-        System.out.println("*************************\n");
+        model.addAttribute("homeworks", homeworkService.getHomeworks());
+        model.addAttribute("name", homeworkService.getUserName());
+
         return "welcome";
+    }
+    @RequestMapping({"list","/list"})
+    public String getIndexPage(Model model){
+//        log.debug("RequestMapping was invoked");
+        model.addAttribute("zadania", exerciseService.getExercises());
+        return "list";
     }
 }

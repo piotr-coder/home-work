@@ -3,6 +3,7 @@ package springhomework.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -15,6 +16,9 @@ public class Homework {
     private String task;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "homework")
-    private Set<Exercise> exercises;
+    private Set<Exercise> exercises = new HashSet<>();
 
+    public void addExercise(Exercise exercise){
+        exercises.add(exercise);
+    }
 }

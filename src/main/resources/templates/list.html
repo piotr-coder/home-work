@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title th:text="'Zadania Domowe dla ' + ${name}">Zadania Domowe</title>
+    <title>Zadania Home</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -26,7 +26,7 @@
                     <h1 class="panel-title">Zadania do zrobienia</h1>
                 </div>
                 <div class="panel-body">
-                    <div class="table-responsive" th:if="${not #lists.isEmpty(homeworks)}">
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(zadania)}">
                         <table class="table table-hover ">
                             <thead class="thead-inverse">
                             <tr>
@@ -45,11 +45,10 @@
                                 <td>Tasty Goodnees 2</td>
                                 <td><a href="#">View</a></td>
                             </tr>
-                            <tr th:each="homework : ${homeworks}">
-                                <td th:text="${homework.id}">334</td>
-                                <td th:text="${homework.name}">Tasty Goodnees 3</td>
-                                <td th:text="${homework.task}">Tasty Goodnees 3</td>
-                                <td><a href="#" th:href="@{'/exercise/' + ${homework.id} + '/show'}">View</a></td>
+                            <tr th:each="exercise : ${zadania}">
+                                <td th:text="${exercise.id}">334</td>
+                                <td th:text="${exercise.content}">Tasty Goodnees 3</td>
+                                <td><a href="#" th:href="@{'/exercise/' + ${exercise.id} + '/show'}">View</a></td>
                                 <!--<td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>-->
                                 <!--<td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>-->
                             </tr>
