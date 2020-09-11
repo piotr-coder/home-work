@@ -16,6 +16,8 @@ public class Exercise {
     private Long id;
 
     private String content;
+    private String guess;
+
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Answer> answers = new HashSet<>();
 

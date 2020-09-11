@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title th:text="'Zadania Domowe dla ' + ${name}">Zadania Domowe</title>
+    <title th:text="':: Homewors for ' + ${name} + ' ::'">Zadania Domowe</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -23,16 +23,16 @@
             <div class="panel panel-primary">
 
                 <div class="panel-heading">
-                    <h1 class="panel-title">Zadania do zrobienia</h1>
+                    <h1 class="panel-title" th:text="${name} + ', oto przygotowane dla Ciebie zadania:'">Zadania do zrobienia</h1>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive" th:if="${not #lists.isEmpty(homeworks)}">
                         <table class="table table-hover ">
                             <thead class="thead-inverse">
                             <tr>
-                                <th>ID</th>
-                                <th>Description</th>
-                                <th>View</th>
+                                <th>Numer</th>
+                                <th>Tytuł</th>
+                                <th>Polecenie</th>
                             </tr>
                             </thead>
                             <tr th:remove="all">
@@ -49,7 +49,7 @@
                                 <td th:text="${homework.id}">334</td>
                                 <td th:text="${homework.name}">Tasty Goodnees 3</td>
                                 <td th:text="${homework.task}">Tasty Goodnees 3</td>
-                                <td><a href="#" th:href="@{'/exercise/' + ${homework.id} + '/show'}">View</a></td>
+                                <td><a href="#" th:href="@{'/homework/' + ${homework.id} + '/show'}">View</a></td>
                                 <!--<td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>-->
                                 <!--<td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>-->
                             </tr>
