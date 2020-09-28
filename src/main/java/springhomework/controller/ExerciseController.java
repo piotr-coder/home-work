@@ -12,13 +12,20 @@ import springhomework.services.HomeworkService;
 @Data
 @Slf4j
 @Controller
-public class AnswerController {
+public class ExerciseController {
     private final ExerciseService exerciseService;
     private final HomeworkService homeworkService;
 
     @RequestMapping("/homework/{id}/show")
     public String showHomeworkById(@PathVariable String id, Model model){
-        model.addAttribute("zadania", homeworkService.findById(Long.valueOf(id)).getExercises());
+        model.addAttribute("zadania", homeworkService.findById(Long.valueOf(id)));
         return "/exercise/list";
+    }
+    @RequestMapping("/homework/{homeworkId}/exercise/{exerciseId}")
+    public String showExerciseById(@PathVariable String homeworkId, @PathVariable String exerciseId, Model model){
+        model.addAttribute("zadania", homeworkService.findById(Long.valueOf(homeworkId)));
+        model.addAttribute("exercise", exerciseService
+                .findByHomeworkIdAndExerciseId(Long.valueOf(homeworkId),Long.valueOf(exerciseId)));
+        return "/exercise/exerciseform";
     }
 }

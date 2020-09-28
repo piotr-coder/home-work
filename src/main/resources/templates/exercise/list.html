@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Zadania Home</title>
+    <title>Zadania Domowe</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -23,16 +23,16 @@
             <div class="panel panel-primary">
 
                 <div class="panel-heading">
-                    <h1 class="panel-title">Zadania do zrobienia</h1>
+                    <h1 class="panel-title" th:text="${zadania.getName()} + ' ::     ' + ${zadania.getTask()}">Zadania do zrobienia</h1>
                 </div>
                 <div class="panel-body">
-                    <div class="table-responsive" th:if="${not #lists.isEmpty(zadania)}">
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(zadania.getExercises())}">
                         <table class="table table-hover ">
                             <thead class="thead-inverse">
                             <tr>
-                                <th>ID</th>
-                                <th>Description</th>
-                                <th>View</th>
+                                <th>Nr</th>
+                                <th>Treść</th>
+                                <th>Podgląd</th>
                             </tr>
                             </thead>
                             <tr th:remove="all">
@@ -45,10 +45,12 @@
                                 <td>Tasty Goodnees 2</td>
                                 <td><a href="#">View</a></td>
                             </tr>
-                            <tr th:each="exercise : ${zadania}">
+                            <tr th:each="exercise : ${zadania.getExercises()}">
                                 <td th:text="${exercise.id}">334</td>
                                 <td th:text="${exercise.content}">Tasty Goodnees 3</td>
-                                <td><a href="#" th:href="@{'/exercise/' + ${exercise.id} + '/show'}">View</a></td>
+                                <td>
+                                    <a href="#" th:href="@{'/homework/' + ${zadania.id} + '/exercise/' + ${exercise.id}}"
+                                       th:text="${exercise.guess} ? 'Popraw' : 'Wykonaj'">View</a></td>
                                 <!--<td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>-->
                                 <!--<td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>-->
                             </tr>

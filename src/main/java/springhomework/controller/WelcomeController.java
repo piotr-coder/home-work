@@ -12,6 +12,8 @@ import springhomework.domain.Homework;
 import springhomework.services.ExerciseService;
 import springhomework.services.HomeworkService;
 
+import java.util.*;
+
 @Slf4j
 @Data
 @Controller
@@ -42,7 +44,13 @@ public class WelcomeController {
     @RequestMapping({"welcome", "/welcome"})
     public String showWelcomePage(Model model){
         System.out.println("User name was set by user to: " + homeworkService.getUserName());
-        model.addAttribute("homeworks", homeworkService.getHomeworks());
+
+        TreeSet<Homework> ts = new TreeSet<Homework> ();
+        ts.addAll(homeworkService.getHomeworks());
+        Set<?> homeworkSet = homeworkService.getHomeworks();
+        List<Homework> homeworkList = new ArrayList<Homework>();
+        Collections.sort(homeworkList);
+        model.addAttribute("homeworks", ts);
         model.addAttribute("name", homeworkService.getUserName());
 
         return "listHomeworks";
