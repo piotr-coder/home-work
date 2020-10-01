@@ -30,8 +30,8 @@
                         <table class="table table-hover ">
                             <thead class="thead-inverse">
                             <tr>
-                                <th>Numer</th>
-                                <th>Tytuł</th>
+                                <th>Zadanie</th>
+                                <!--<th>Tytuł</th>-->
                                 <th>Polecenie</th>
                                 <th>Podgląd</th>
                             </tr>
@@ -48,7 +48,7 @@
                             </tr>
                             <tr th:each="homework : ${homeworks}">
                                 <td th:text="${homework.id}">334</td>
-                                <td th:text="${homework.name}">Zadanie nr ...</td>
+                                <!--<td th:text="${homework.name}">Zadanie nr ...</td>-->
                                 <td th:text="${homework.task}">Polecenie...</td>
                                 <td><a href="#" th:href="@{'/homework/' + ${homework.id} + '/show'}">View</a></td>
                                 <!--<td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>-->

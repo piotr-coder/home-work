@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Data
 @Entity
-public class Homework implements Comparable<Homework> {
+public class Homework implements Comparable <Homework> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,8 +24,8 @@ public class Homework implements Comparable<Homework> {
 
     @Override
     public int compareTo(Homework o) {
-        if(o.id > this.id) return 1;
-        return 0;
+        if(o.getId() > this.id) return 1;
+        else return 0;
     }
 
     //    @Override

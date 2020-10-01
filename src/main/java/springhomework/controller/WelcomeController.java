@@ -31,13 +31,6 @@ public class WelcomeController {
     @PostMapping({"index","/index"})
     public String handleIndexPage(@RequestParam String userName){
         homeworkService.setUserName(userName);
-
-        // for tests only
-        Homework zadanie = homeworkService.findById(1l);
-        zadanie.setName(userName);
-        homeworkService.saveHomework(zadanie);
-        // for tests only
-
         log.info("I'm in handleIndexPage(): User entered name: " + userName);
         return "redirect:/welcome";
     }
@@ -45,12 +38,16 @@ public class WelcomeController {
     public String showWelcomePage(Model model){
         System.out.println("User name was set by user to: " + homeworkService.getUserName());
 
-        TreeSet<Homework> ts = new TreeSet<Homework> ();
+        // for tests only
+        TreeSet<Homework> ts = new TreeSet<> ();
         ts.addAll(homeworkService.getHomeworks());
         Set<?> homeworkSet = homeworkService.getHomeworks();
-        List<Homework> homeworkList = new ArrayList<Homework>();
+        List<Homework> homeworkList = new ArrayList<>();
+        homeworkService.getHomeworks().iterator().forEachRemaining(homeworkList::add);
         Collections.sort(homeworkList);
-        model.addAttribute("homeworks", ts);
+        // for tests only
+
+        model.addAttribute("homeworks", homeworkList);
         model.addAttribute("name", homeworkService.getUserName());
 
         return "listHomeworks";
