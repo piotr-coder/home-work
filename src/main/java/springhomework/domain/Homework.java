@@ -12,7 +12,7 @@ public class Homework implements Comparable <Homework> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String rate;
     private String task;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "homework")
@@ -26,6 +26,14 @@ public class Homework implements Comparable <Homework> {
     public int compareTo(Homework o) {
         if(o.getId() > this.id) return 1;
         else return 0;
+    }
+    public Double setRate(){
+        // todo check if all exercise were done
+        Double marks = 0d;
+        for (Exercise exercise : exercises){
+            marks =+exercise.setRate();
+        }
+        return marks/exercises.size();
     }
 
     //    @Override

@@ -22,6 +22,7 @@ public class ExerciseController {
     @RequestMapping("/homework/{id}/show")
     public String showHomeworkById(@PathVariable String id, Model model){
         model.addAttribute("zadania", homeworkService.findById(Long.valueOf(id)));
+        model.addAttribute("userName", homeworkService.getUserName());
         return "/exercise/list";
     }
     @RequestMapping("/homework/{homeworkId}/exercise/{exerciseId}")
@@ -29,6 +30,7 @@ public class ExerciseController {
         model.addAttribute("zadania", homeworkService.findById(Long.valueOf(homeworkId)));
         model.addAttribute("exercise", exerciseService
                 .findByHomeworkIdAndExerciseId(Long.valueOf(homeworkId),Long.valueOf(exerciseId)));
+        model.addAttribute("userName", homeworkService.getUserName());
         return "/exercise/exerciseform";
     }
     @PostMapping("answer")
@@ -40,6 +42,7 @@ public class ExerciseController {
 
         System.out.println("Answer in exerciseService was set to: " + exerciseService
                 .findByHomeworkIdAndExerciseId(exercise.getHomework().getId(), exercise.getId()).getGuess());
+        System.out.println("Your rate is: " + exercise.setRate());
         return "redirect:/homework/" + exercise.getHomework().getId() + "/show";
     }
 }

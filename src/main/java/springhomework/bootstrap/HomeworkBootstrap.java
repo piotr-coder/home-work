@@ -34,7 +34,7 @@ public class HomeworkBootstrap implements ApplicationListener<ContextRefreshedEv
 
         Homework homework = new Homework();
         homework.setTask("Przetłumacz poniższe zdanie");
-        homework.setName("Zadanie 1");
+//        homework.setName("Zadanie 1");
         Set<Exercise> exerciseList = makeExercises();
         for(Exercise exercise : exerciseList){
             exercise.setHomework(homework);
@@ -45,7 +45,7 @@ public class HomeworkBootstrap implements ApplicationListener<ContextRefreshedEv
 
         homework = new Homework();
         homework.setTask("Napisz zdania o przeciwnym znaczeniu");
-        homework.setName("Zadanie 2");
+//        homework.setName("Zadanie 2");
 
         Set<Exercise> exerciseList2 = makeExercises2();
         for(Exercise exercise : exerciseList2){
