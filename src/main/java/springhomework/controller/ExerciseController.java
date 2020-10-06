@@ -23,7 +23,7 @@ public class ExerciseController {
     public String showHomeworkById(@PathVariable String id, Model model){
         model.addAttribute("zadania", homeworkService.findById(Long.valueOf(id)));
         model.addAttribute("userName", homeworkService.getUserName());
-        return "/exercise/list";
+        return "exercise/list";
     }
     @RequestMapping("/homework/{homeworkId}/exercise/{exerciseId}")
     public String showExerciseById(@PathVariable String homeworkId, @PathVariable String exerciseId, Model model){
@@ -31,7 +31,7 @@ public class ExerciseController {
         model.addAttribute("exercise", exerciseService
                 .findByHomeworkIdAndExerciseId(Long.valueOf(homeworkId),Long.valueOf(exerciseId)));
         model.addAttribute("userName", homeworkService.getUserName());
-        return "/exercise/exerciseform";
+        return "exercise/exerciseform";
     }
     @PostMapping("answer")
     public String saveAnswer(@ModelAttribute("exercise") Exercise exercise){

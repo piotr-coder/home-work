@@ -12,7 +12,7 @@ public class Homework implements Comparable <Homework> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String rate;
+    private Double rate;
     private String task;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "homework")
@@ -33,7 +33,8 @@ public class Homework implements Comparable <Homework> {
         for (Exercise exercise : exercises){
             marks =+exercise.setRate();
         }
-        return marks/exercises.size();
+        rate = marks/exercises.size();
+        return rate;
     }
 
     //    @Override
