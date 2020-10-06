@@ -8,11 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import springhomework.domain.Homework;
 import springhomework.services.ExerciseService;
 import springhomework.services.HomeworkService;
-
-import java.util.*;
 
 @Slf4j
 @Data
@@ -39,15 +36,16 @@ public class WelcomeController {
         System.out.println("User name was set by user to: " + homeworkService.getUserName());
 
         // for tests only
-        TreeSet<Homework> ts = new TreeSet<> ();
-        ts.addAll(homeworkService.getHomeworks());
-        Set<?> homeworkSet = homeworkService.getHomeworks();
-        List<Homework> homeworkList = new ArrayList<>();
-        homeworkService.getHomeworks().iterator().forEachRemaining(homeworkList::add);
-        Collections.sort(homeworkList);
+//        TreeSet<Homework> ts = new TreeSet<> ();
+//        ts.addAll(homeworkService.getHomeworks());
+//        Set<?> homeworkSet = homeworkService.getHomeworks();
+//        List<Homework> homeworkList = new ArrayList<>();
+//        homeworkService.getHomeworks().iterator().forEachRemaining(homeworkList::add);
+//        Collections.sort(homeworkList);
+//        model.addAttribute("homeworks", homeworkList);
         // for tests only
 
-        model.addAttribute("homeworks", homeworkList);
+        model.addAttribute("homeworks", homeworkService.getHomeworks());
         model.addAttribute("name", homeworkService.getUserName());
 
         return "listHomeworks";

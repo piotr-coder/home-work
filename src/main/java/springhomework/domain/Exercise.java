@@ -26,13 +26,15 @@ public class Exercise {
     private Homework homework;
 
     public Double setRate() {
+        System.out.println("Checking equality (exercise id: " + id + " content: " + content
+                + ") of guess: \n" + guess + "\nand the answers:");
         for(Answer answer : answers){
-            if (answer.equals(guess)) return 6d;
-
-//        todo need to improve!!;
+            System.out.println(answer.getDescription());
+            if (answer.getDescription().equals(guess)) return 6d;
         }
 
 //        todo implement all other possible solutions;
+
 
         return 0d;
     }

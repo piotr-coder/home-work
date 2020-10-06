@@ -41,8 +41,8 @@ public class ExerciseController {
         exerciseService.saveExercise(newExercise);
 
         System.out.println("Answer in exerciseService was set to: " + exerciseService
-                .findByHomeworkIdAndExerciseId(exercise.getHomework().getId(), exercise.getId()).getGuess());
-        System.out.println("Your rate is: " + exercise.setRate());
-        return "redirect:/homework/" + exercise.getHomework().getId() + "/show";
+                .findByHomeworkIdAndExerciseId(newExercise.getHomework().getId(), exercise.getId()).getGuess());
+        System.out.println("Your rate is: " + newExercise.setRate());
+        return "redirect:/homework/" + newExercise.getHomework().getId() + "/show";
     }
 }
