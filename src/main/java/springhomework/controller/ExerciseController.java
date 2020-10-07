@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import springhomework.domain.Exercise;
+import springhomework.domain.Homework;
 import springhomework.services.ExerciseService;
 import springhomework.services.HomeworkService;
 
@@ -21,8 +22,14 @@ public class ExerciseController {
 
     @RequestMapping("/homework/{id}/show")
     public String showHomeworkById(@PathVariable String id, Model model){
-        model.addAttribute("zadania", homeworkService.findById(Long.valueOf(id)));
+        Homework zadania = homeworkService.findById(Long.valueOf(id));
+        model.addAttribute("zadania", zadania);
         model.addAttribute("userName", homeworkService.getUserName());
+        boolean areExercisesDone = true;
+        for (Exercise exercise : zadania.getExercises()) {
+            if (exercise.getGuess() == null) areExercisesDone = false;
+        }
+        model.addAttribute("areExercisesDone", areExercisesDone);
         return "exercise/list";
     }
     @RequestMapping("/homework/{homeworkId}/exercise/{exerciseId}")
@@ -35,14 +42,15 @@ public class ExerciseController {
     }
     @PostMapping("answer")
     public String saveAnswer(@ModelAttribute("exercise") Exercise exercise){
-        System.out.println("Exercise id is: " + exercise.getId());
         Exercise newExercise = exerciseService.findById(exercise.getId());
         newExercise.setGuess(exercise.getGuess());
         exerciseService.saveExercise(newExercise);
 
-        System.out.println("Answer in exerciseService was set to: " + exerciseService
-                .findByHomeworkIdAndExerciseId(newExercise.getHomework().getId(), exercise.getId()).getGuess());
-        System.out.println("Your rate is: " + newExercise.setRate());
         return "redirect:/homework/" + newExercise.getHomework().getId() + "/show";
+    }
+    @RequestMapping("rate/{homeworkId}")
+    public String rateHomework(@PathVariable String homeworkId){
+        homeworkService.findById(Long.valueOf(homeworkId)).setRate();
+        return "redirect:/homework/" + homeworkId + "/show";
     }
 }
