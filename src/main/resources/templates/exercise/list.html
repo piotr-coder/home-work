@@ -33,7 +33,7 @@
                                 <th>Nr</th>
                                 <th>Treść</th>
                                 <th>Podgląd</th>
-                                <th th:if="${areExercisesDone}">Ocena</th>
+                                <th th:if="${areExercisesRated and not #lists.isEmpty(zadania.getRate())}">Ocena</th>
                             </tr>
                             </thead>
                             <tr th:each="exercise : ${zadania.getExercises()}">
@@ -42,25 +42,25 @@
                                 <td>
                                     <a href="#" th:href="@{'/homework/' + ${zadania.id} + '/exercise/' + ${exercise.id}}"
                                        th:text="${exercise.guess} ? 'Popraw' : 'Wykonaj'">View</a></td>
-                                <td th:text="${exercise.rate}">Jedynka</td>
+                                <td th:text="${exercise.rate}" th:if="${areExercisesRated}">Jedynka</td>
                                 <!--<td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>-->
                             </tr>
                             <thead class="thead-inverse">
                             <tr th:if="${!areExercisesDone and #lists.isEmpty(zadania.getRate())}">
                                 <th></th>
                                 <th>Wykonaj wszystkie ćwiczenia by wystawić ocenę</th>
-                                <td>
-                                    <a href="#"
-                                       th:unless="${!areExercisesDone}">View</a></td>
                             </tr>
-                            <tr th:if="${areExercisesDone and #lists.isEmpty(zadania.getRate())}">
+                            <!--<tr th:unless="${!areExercisesDone and !areExercisesRated and #lists.isEmpty(zadania.getRate())}">-->
+                            <tr>
                                 <td></td>
                                 <td></td>
                                 <td>
-                                    <a href="#" th:href="@{/rate/} + ${zadania.getId()}"></a>
+                                    <a href="#" th:href="@{'/homework/' + ${zadania.id} + '/rate'}"
+                                       th:if="${areExercisesDone and #lists.isEmpty(zadania.getRate())}"
+                                       th:text="Oceń">View</a></td>
                                     <!--<button type="submit" class="btn btn-primary"-->
                                             <!--th:action="@{/rate/} + ${zadania.getId()}" method="get">Oceń</button>-->
-                                </td>
+                                <th th:text="${zadania.rate}" th:if="${areExercisesRated}">GlobalRate</th>
                             </tr>
                             </thead>
                         </table>

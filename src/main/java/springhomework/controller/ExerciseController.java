@@ -25,11 +25,22 @@ public class ExerciseController {
         Homework zadania = homeworkService.findById(Long.valueOf(id));
         model.addAttribute("zadania", zadania);
         model.addAttribute("userName", homeworkService.getUserName());
-        boolean areExercisesDone = true;
+        boolean areExercisesDone = true;    // move to HomeworkServiceImpl ?
         for (Exercise exercise : zadania.getExercises()) {
             if (exercise.getGuess() == null) areExercisesDone = false;
         }
+        System.out.println("areExercisesDone is:" + areExercisesDone);
         model.addAttribute("areExercisesDone", areExercisesDone);
+
+        boolean areExercisesRated = true;    // move to HomeworkServiceImpl ?
+        for (Exercise exercise : zadania.getExercises()) {
+            if (exercise.getRate() == null) {
+                areExercisesRated = false;
+            }
+        }
+        model.addAttribute("areExercisesRated", areExercisesRated);
+
+
         return "exercise/list";
     }
     @RequestMapping("/homework/{homeworkId}/exercise/{exerciseId}")
@@ -48,9 +59,19 @@ public class ExerciseController {
 
         return "redirect:/homework/" + newExercise.getHomework().getId() + "/show";
     }
-    @RequestMapping("rate/{homeworkId}")
+    @RequestMapping("/homework/{homeworkId}/rate")
     public String rateHomework(@PathVariable String homeworkId){
-        homeworkService.findById(Long.valueOf(homeworkId)).setRate();
+        Double marks = 0d;
+        Homework homework = homeworkService.findById(Long.valueOf(homeworkId));
+        for (Exercise exercise : homework.getExercises()) {
+            Double mark = exercise.checkAnswer();
+            marks += mark;
+            exercise.setRate(mark);
+            exerciseService.saveExercise(exercise);
+        }
+        homework.setRate(marks/homework.getExercises().size());
+        homeworkService.saveHomework(homework);
+//        homeworkService.findById(Long.valueOf(homeworkId)).setRate();
         return "redirect:/homework/" + homeworkId + "/show";
     }
 }

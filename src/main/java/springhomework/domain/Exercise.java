@@ -25,7 +25,7 @@ public class Exercise {
     @ManyToOne
     private Homework homework;
 
-    public Double setRate() {
+    public Double checkAnswer() {
         System.out.println("Checking equality (exercise id: " + id + " content: " + content
                 + ") of guess: \n" + guess + "\nand the answers:");
         for(Answer answer : answers){
@@ -34,7 +34,6 @@ public class Exercise {
         }
 
 //        todo implement all other possible solutions;
-
 
         return 0d;
     }

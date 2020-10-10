@@ -27,15 +27,15 @@ public class Homework implements Comparable <Homework> {
         if(o.getId() > this.id) return 1;
         else return 0;
     }
-    public Double setRate(){
-        // todo check if all exercise were done
-        Double marks = 0d;
-        for (Exercise exercise : exercises){
-            marks =+exercise.setRate();
-        }
-        rate = marks/exercises.size();
-        return rate;
-    }
+//    public Double setRate(){
+//        // todo check if all exercise were done
+//        Double marks = 0d;
+//        for (Exercise exercise : exercises){
+//            marks =+exercise.setRate();
+//        }
+//        rate = marks/exercises.size();
+//        return rate;
+//    }
 
     //    @Override
 //    public int compare(Homework o1, Homework o2) {

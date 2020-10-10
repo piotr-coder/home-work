@@ -134,6 +134,55 @@ public class HomeworkBootstrap implements ApplicationListener<ContextRefreshedEv
 
         exercises.add(exercise);
 
+
+        exercise = new Exercise();
+        exercise.setContent("Wasze koty nie potrzebują jedzenia!");
+        answers = new HashSet<>();
+        answer = new Answer();
+        answer.setDescription("Your cats are not needing food");
+        answer.setExercise(exercise);
+        answers.add(answer);
+        answer2 = new Answer();
+        answer2.setDescription("Your cats are not needing food!");
+        answer2.setExercise(exercise);
+        answers.add(answer2);
+        answer3 = new Answer();
+        answer3.setDescription("Your cats aren't needing food");
+        answer3.setExercise(exercise);
+        answers.add(answer3);
+        answer = new Answer();
+        answer.setDescription("Your cats aren't needing food");
+        answer.setExercise(exercise);
+        answers.add(answer);
+        exercise.setAnswers(answers);
+
+        exercises.add(exercise);
+
+
+
+        exercise = new Exercise();
+        exercise.setContent("OK, do zobaczenia w szkole o godzinie 12, dobrze?");
+        answers = new HashSet<>();
+        answer = new Answer();
+        answer.setDescription("OK, see you at school at twelve o'clock, right?");
+        answer.setExercise(exercise);
+        answers.add(answer);
+        answer2 = new Answer();
+        answer2.setDescription("OK, see you at school at twelve o'clock, right");
+        answer2.setExercise(exercise);
+        answers.add(answer2);
+        answer3 = new Answer();
+        answer3.setDescription("Ok, see you at school at twelve o'clock, right?");
+        answer3.setExercise(exercise);
+        answers.add(answer3);
+        answer = new Answer();
+        answer.setDescription("Ok, see you at school at twelve o'clock, right?");
+        answer.setExercise(exercise);
+        answers.add(answer);
+        exercise.setAnswers(answers);
+
+        exercises.add(exercise);
+
         return exercises;
     }
     private Set<Exercise> makeExercises2(){
